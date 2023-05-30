@@ -1903,9 +1903,7 @@ const Footer = () => {
         Aniket Nimkar
       </a>
       <i class="fa-solid fa-copyright"></i>2023
-      <strong>
-        Food<span>Bytes</span>
-      </strong>
+      <strong>FoodBytes</strong>
     </div>
   );
 };
