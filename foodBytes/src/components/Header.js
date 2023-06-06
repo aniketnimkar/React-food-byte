@@ -16,7 +16,9 @@ const Title = () => (
 );
 
 const Header = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // use useState for user logged in or logged out
+  const [isLoggedin, setIsLoggedin] = useState(true);
+
   return (
     <div className="header">
       <Title />
@@ -25,14 +27,26 @@ const Header = () => {
           <li>Home</li>
           <li>About</li>
           <li>Contact</li>
-          <li>Cart</li>
+          <li>
+            <i className="fa-solid fa-cart-shopping"></i>
+          </li>
+          <li>
+            {/* use conditional rendering for login and logout */}
+            {isLoggedin ? (
+              <button
+                className="logout-btn"
+                onClick={() => setIsLoggedin(false)}
+              >
+                Logout
+              </button>
+            ) : (
+              <button className="login-btn" onClick={() => setIsLoggedin(true)}>
+                Login
+              </button>
+            )}
+          </li>
         </ul>
       </div>
-      {isLoggedIn ? (
-        <button onClick={() => setIsLoggedIn(false)}>Login</button>
-      ) : (
-        <button onClick={() => setIsLoggedIn(true)}>Logout</button>
-      )}
     </div>
   );
 };
