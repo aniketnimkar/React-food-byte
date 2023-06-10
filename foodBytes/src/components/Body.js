@@ -1,43 +1,25 @@
-// Body Component for body section: It contain all restaurant cards
-// We are mapping restaurantList array and passing data to RestaurantCard component as props with unique key as index
-import { useState, useEffect } from "react";
-import { swiggy_api_URL } from "../contants";
+import { useState } from "react";
+import { swiggy_api_URL } from "../constants";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
-
-function filterData(searchText, restaurants) {
-  const filterData = restaurants.filter((restaurant) =>
-    restaurant?.data?.name.toLowerCase().includes(searchText.toLowerCase())
-  );
-  return filterData;
-}
+import { filterData } from "../utils/Helper"; // For reusability or readability filterData function is added in Helper.js file of Utils folder
+import useResData from "../Hooks/useResData"; // imported custom hook useResData which gives restaurant data from swigy api
+import useOnline from "../Hooks/useOnline"; // imported custom hook useOnline which checks user is online or not
+import UserOffline from "./UserOffline";
 
 // Body Component for body section: It contain all restaurant cards
 const Body = () => {
   // useState: To create a state variable, searchText, allRestaurants and filteredRestaurants is local state variable
   const [searchText, setSearchText] = useState("");
-  const [allRestaurants, setAllRestaurants] = useState([]);
-  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
+  const [allRestaurants, FilterRes] = useResData(swiggy_api_URL);
+  const [filteredRestaurants, setFilteredRestaurants] = useState(null);
+  const isOnline = useOnline();
 
-  // use useEffect for one time call getRestaurants using empty dependency array
-  useEffect(() => {
-    getRestaurants();
-  }, []);
-
-  // async function getRestaurant to fetch Swiggy API data
-  async function getRestaurants() {
-    // handle the error using try... catch
-    try {
-      const data = await fetch(swiggy_api_URL);
-      const json = await data.json();
-      // updated state variable restaurants with Swiggy API data
-      setAllRestaurants(json?.data?.cards[2]?.data?.data?.cards);
-      setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);
-    } catch (error) {
-      console.log(error);
-    }
+  // if user is not Online then return UserOffline component
+  if (!isOnline) {
+    return <UserOffline />;
   }
 
   // use searchData function and set condition if data is empty show error message
@@ -84,21 +66,25 @@ const Body = () => {
       {errorMessage && <div className="error-container">{errorMessage}</div>}
 
       {/* if restaurants data is not fetched then display Shimmer UI after the fetched data display restaurants cards */}
-      {allRestaurants?.length === 0 ? (
+      {allRestaurants?.length === 0 && FilterRes?.length === 0 ? (
         <Shimmer />
       ) : (
         <div className="restaurant-list">
           {/* We are mapping restaurants array and passing JSON array data to RestaurantCard component as props with unique key as restaurant.data.id */}
-          {filteredRestaurants.map((restaurant) => {
-            return (
-              <Link
-                to={"/restaurant/" + restaurant.data.id}
-                key={restaurant.data.id}
-              >
-                <RestaurantCard {...restaurant.data} />
-              </Link>
-            );
-          })}
+          {(filteredRestaurants === null ? FilterRes : filteredRestaurants).map(
+            (restaurant) => {
+              return (
+                <Link
+                  to={"/restaurant/" + restaurant.data.id}
+                  key={restaurant.data.id}
+                >
+                  {" "}
+                  {/* if we click on any restaurant card it will redirect to that restaurant menu page */}
+                  <RestaurantCard {...restaurant.data} />
+                </Link>
+              );
+            }
+          )}
         </div>
       )}
     </>

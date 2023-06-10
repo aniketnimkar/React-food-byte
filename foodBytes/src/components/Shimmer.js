@@ -1,4 +1,4 @@
-import { shimmer_card_unit, shimmer_menu_card_unit } from "../contants";
+import { shimmer_card_unit, shimmer_menu_card_unit } from "../constants";
 const CardShimmer = () => {
   return (
     <div className="shimmer-card">

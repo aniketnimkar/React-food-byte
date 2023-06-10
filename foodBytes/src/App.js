@@ -9,13 +9,25 @@ import Error from "./components/Error";
 import Contact from "./components/Contact";
 import RestaurantMenu from "./components/RestaurantMenu";
 import Profile from "./components/Profile";
-import ProfileClass from "./components/ProfileClass";
+// import ProfileClass from "./components/ProfileClass";
 
-//jsx => React.createElement => Object => HTML(DOM)
-
-// This is Config Driven UI
-
-// Footer component for footer section
+/* My Food App structure will look like this, 
+            1) Header
+                - Logo
+                - Nav Items(right side)
+                - Cart
+            2) Body
+                - Search bar
+                - Restaurants List
+                    - Restaurant card
+                        - Image
+                        - Name
+                        - Rating
+            3) Footer
+                - Links
+                - Copyrights
+       
+*/
 
 const AppLayout = () => {
   return (
@@ -58,6 +70,10 @@ const appRouter = createBrowserRouter([
       },
     ],
   },
+  // {
+  //   path: "login",
+  //   element: <Login />,
+  // },
 ]);
 
 // create root using createRoot

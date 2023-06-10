@@ -1,5 +1,5 @@
 //this is config Driven UI.
-import { IMG_CDN_URL } from "../contants";
+import { IMG_CDN_URL } from "../constants";
 const RestaurantCard = ({
   cloudinaryImageId,
   name,
