@@ -23,7 +23,7 @@ const RestaurantCard = ({
         </h4>
         <h4>{lastMileTravelString}</h4>
         <h4>{costForTwoString}</h4>
-        <h4>{user.name}</h4>
+        {/* <h4>{user.name}</h4> */}
       </span>
     </div>
   );

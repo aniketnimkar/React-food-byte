@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import UserContext from "../utils/UserContext";
+import { useSelector } from "react-redux";
 
 const loggedInUser = () => {
   //API call
@@ -22,6 +23,7 @@ const Header = () => {
   const [isLoggedin, setIsLoggedin] = useState(true);
 
   const { user } = useContext(UserContext);
+  const cartItems = useSelector((store) => store.cart.items);
   return (
     <div className="header">
       <Title />
@@ -39,15 +41,18 @@ const Header = () => {
             <li>Contact</li>
           </Link>
 
-          <Link to="/Instamart">
+          {/* <Link to="/Instamart">
             <li>Instamart</li>
+          </Link> */}
+          <Link to="/cart">
+            <li>CART- {cartItems.length} ITEMS</li>
           </Link>
           <li>
             <i className="fa-solid fa-cart-shopping"></i>
           </li>
           <li>
             {/* use conditional rendering for login and logout */}
-            <h2>{user.name}</h2>
+            {/* <h2>{user.name}</h2> */}
             {isLoggedin ? (
               <button
                 className="logout-btn"

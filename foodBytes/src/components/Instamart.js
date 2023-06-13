@@ -28,7 +28,7 @@ const Instamart = () => {
         title={"About Instamaert"}
         Section
         description={
-          "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of"
+          "Instamart is not a well-known or widely recognized term or platform as of my knowledge cutoff in September 2021. It's possible that Instamart may be a regional or local service, or it could be a newly established platform that has gained popularity after my knowledge cutoff. Can you provide more specific information or context about Instamart so that I can assist you better? Instamart aims to deliver groceries in 15-30 minutes through a network of seller-owned dark stores that emerged from the learnings of Swiggy Stores, a hyperlocal delivery marketplace for groceries and other essentials that shut last year."
         }
         isVisible={visibleSection === "about"}
         setIsVisible={() => setVisibleSection("about")}

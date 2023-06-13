@@ -714,3 +714,9 @@ a {
 }
 
 /* footer CSS End */
+
+.cart-card {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+}

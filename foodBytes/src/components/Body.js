@@ -63,7 +63,7 @@ const Body = () => {
         >
           Search
         </button>
-        <input
+        {/* <input
           value={user.name}
           onChange={(e) =>
             setUser({
@@ -71,7 +71,7 @@ const Body = () => {
               email: "newEmail@xyz.com",
             })
           }
-        ></input>
+        ></input> */}
       </div>
       {errorMessage && <div className="error-container">{errorMessage}</div>}
 
