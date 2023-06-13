@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { swiggy_api_URL } from "../constants";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
@@ -7,6 +7,7 @@ import { filterData } from "../utils/Helper"; // For reusability or readability 
 import useResData from "../Hooks/useResData"; // imported custom hook useResData which gives restaurant data from swigy api
 import useOnline from "../Hooks/useOnline"; // imported custom hook useOnline which checks user is online or not
 import UserOffline from "./UserOffline";
+import UserContext from "../utils/UserContext.js";
 
 // Body Component for body section: It contain all restaurant cards
 const Body = () => {
@@ -16,7 +17,7 @@ const Body = () => {
   const [allRestaurants, FilterRes] = useResData(swiggy_api_URL);
   const [filteredRestaurants, setFilteredRestaurants] = useState(null);
   const isOnline = useOnline();
-
+  const { user, setUser } = useContext(UserContext);
   // if user is not Online then return UserOffline component
   if (!isOnline) {
     return <UserOffline />;
@@ -62,6 +63,15 @@ const Body = () => {
         >
           Search
         </button>
+        <input
+          value={user.name}
+          onChange={(e) =>
+            setUser({
+              name: e.target.value,
+              email: "newEmail@xyz.com",
+            })
+          }
+        ></input>
       </div>
       {errorMessage && <div className="error-container">{errorMessage}</div>}
 
@@ -80,7 +90,7 @@ const Body = () => {
                 >
                   {" "}
                   {/* if we click on any restaurant card it will redirect to that restaurant menu page */}
-                  <RestaurantCard {...restaurant.data} />
+                  <RestaurantCard {...restaurant.data} user={user} />
                 </Link>
               );
             }

@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
+import UserContext from "../utils/UserContext";
 
 const loggedInUser = () => {
   //API call
@@ -20,6 +21,7 @@ const Header = () => {
   // use useState for user logged in or logged out
   const [isLoggedin, setIsLoggedin] = useState(true);
 
+  const { user } = useContext(UserContext);
   return (
     <div className="header">
       <Title />
@@ -28,6 +30,7 @@ const Header = () => {
           <Link to="/">
             <li>Home</li>
           </Link>
+
           <Link to="/About">
             <li>About</li>
           </Link>
@@ -35,11 +38,16 @@ const Header = () => {
           <Link to="/Contact">
             <li>Contact</li>
           </Link>
+
+          <Link to="/Instamart">
+            <li>Instamart</li>
+          </Link>
           <li>
             <i className="fa-solid fa-cart-shopping"></i>
           </li>
           <li>
             {/* use conditional rendering for login and logout */}
+            <h2>{user.name}</h2>
             {isLoggedin ? (
               <button
                 className="logout-btn"
