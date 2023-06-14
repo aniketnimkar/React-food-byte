@@ -13,7 +13,7 @@ import { useState } from "react";
 import Instamart from "./components/Instamart";
 import UserContext from "./utils/UserContext";
 import { Provider } from "react-redux";
-import store from "./utils/Store";
+import Store from "./utils/Store";
 import Cart from "./components/Cart";
 // import ProfileClass from "./components/ProfileClass";
 
@@ -26,7 +26,7 @@ const AppLayout = () => {
   return (
     //boy have, header>logo>list item> cart =>body>search bar
     //
-    <Provider store={store}>
+    <Provider store={Store}>
       <UserContext.Provider
         value={{
           user: user,
