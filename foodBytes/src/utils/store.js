@@ -7,7 +7,7 @@ const Store = configureStore({
 });
 
 export default Store;
-
+//added
 // const rootReducer = combineReducers({
 //   cart: cartSlice,
 // });
