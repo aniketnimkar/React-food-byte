@@ -4,7 +4,7 @@
   "description": "this a food byte project",
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build index.html",
+    "build": "react-scripts build && echo '/* /index.html  200' | cat >build/_redirects ",
     "test": "jest"
   },
   "repository": {
